@@ -4,31 +4,39 @@
     <h1 class="mb-4">Register</h1>
     <main class="form-signin w-25 m-auto">
       <form>
-
-        <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+       <Input :label="'User name'"  :type="'text'" :placeholder="'User name'"/>
+       <Input :label="'Email enter'"  :type="'email'" :placeholder="'Enter Email'"/>
+       <Input :label="'Password'"  :type="'password'" :placeholder="'Password'"/>
+    <Button @click="handler" :disabled="isLoading" >Register</Button>
       </form>
     </main>
   </div>
 
 </template>
 
-<script >
+<script>
 
+
+export default {
+  computed:{
+    isLoading(){
+      return this.$store.state.auth.isLoading
+    }
+
+  },
+  methods:{
+    handler(e){
+      e.preventDefault()
+      const data = {
+          username:"asrorbek12",
+          email:"asrorbek12@gmail.com",
+          password:"12345678"
+      }
+      this.$store.dispatch('register',data)//payload
+    }
+  },
+
+}
 </script>
 
 <style scoped>
